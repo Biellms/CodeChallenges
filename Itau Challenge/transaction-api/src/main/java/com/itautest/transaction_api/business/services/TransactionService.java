@@ -35,4 +35,20 @@ public class TransactionService {
         log.info("[TransactionService] putTransactions: Transaction successfully added");
     }
 
+    public void deleteTransactions() {
+        log.info("[TransactionService] deleteTransactions: Started ");
+        transactionList.clear();
+        log.info("[TransactionService] deleteTransactions: Transaction successfully deleted ");
+    }
+
+    public List<TransactionRequestDTO> getTransactions(Integer searchRange){
+        log.info("[TransactionService] getTransactions: Search Range ->" + searchRange);
+        OffsetDateTime dateHourRange = OffsetDateTime.now().minusSeconds(searchRange);
+
+        log.info("[TransactionService] getTransactions: Transactions successfully returned");
+        return transactionList.stream()
+                .filter(transaction -> transaction.date()
+                        .isAfter(dateHourRange)).toList();
+    }
+
 }
