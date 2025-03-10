@@ -17,7 +17,7 @@ public class StatisticService {
     private final TransactionService transactionService;
 
     public StatisticResponseDTO getStatisticsTransactions (Integer searchRange) {
-        log.info("[TransactionService] getStatisticsTransactions: Search Range -> " + searchRange);
+        log.info("[StatisticService] getStatisticsTransactions: Search Range -> " + searchRange);
 
         long start = System.currentTimeMillis();
 
@@ -32,9 +32,9 @@ public class StatisticService {
 
         long finish = System.currentTimeMillis();
         long requestTime = finish - start;
-        log.info("[TransactionService] getStatisticsTransactions: Request Time -> " + requestTime + "ms");
+        log.info("[StatisticService] getStatisticsTransactions: Request Time -> " + requestTime + "ms");
 
-        log.info("[TransactionService] getStatisticsTransactions: Statistics successfully returned");
+        log.info("[StatisticService] getStatisticsTransactions: Statistics successfully returned");
 
         return new StatisticResponseDTO(
                 statisticsTransactions.getCount(),
