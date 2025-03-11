@@ -17,7 +17,7 @@ public class StatisticService {
     private final TransactionService transactionService;
 
     public StatisticResponseDTO getStatisticsTransactions (Integer searchRange) {
-        log.info("[StatisticService] getStatisticsTransactions: Search Range -> " + searchRange);
+        log.info("[StatisticService] getStatisticsTransactions: Search Range -> " + searchRange + "s");
 
         long start = System.currentTimeMillis();
 

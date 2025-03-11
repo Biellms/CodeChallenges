@@ -38,11 +38,11 @@ public class TransactionService {
     public void deleteTransactions() {
         log.info("[TransactionService] deleteTransactions: Started ");
         transactionList.clear();
-        log.info("[TransactionService] deleteTransactions: Transaction successfully deleted ");
+        log.info("[TransactionService] deleteTransactions: Transactions successfully deleted ");
     }
 
     public List<TransactionRequestDTO> getTransactions(Integer searchRange){
-        log.info("[TransactionService] getTransactions: Search Range ->" + searchRange);
+        log.info("[TransactionService] getTransactions: Search Range -> " + searchRange + "s");
         OffsetDateTime dateHourRange = OffsetDateTime.now().minusSeconds(searchRange);
 
         log.info("[TransactionService] getTransactions: Transactions successfully returned");
