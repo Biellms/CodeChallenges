@@ -18,7 +18,6 @@ public class StatisticService {
 
     public StatisticResponseDTO getStatisticsTransactions (Integer searchRange) {
         log.info("[StatisticService] getStatisticsTransactions: Search Range -> " + searchRange + "s");
-
         long start = System.currentTimeMillis();
 
         List<TransactionRequestDTO> transactions = transactionService.getTransactions(searchRange);
@@ -30,11 +29,9 @@ public class StatisticService {
         DoubleSummaryStatistics statisticsTransactions = transactions.stream()
                 .mapToDouble(TransactionRequestDTO::value).summaryStatistics();
 
-        long finish = System.currentTimeMillis();
-        long requestTime = finish - start;
-        log.info("[StatisticService] getStatisticsTransactions: Request Time -> " + requestTime + "ms");
-
-        log.info("[StatisticService] getStatisticsTransactions: Statistics successfully returned");
+        long requestTime = System.currentTimeMillis() - start;
+        log.info("[StatisticService] getStatisticsTransactions: Statistics successfully returned" +
+                " | Request Time -> " + requestTime + "ms");
 
         return new StatisticResponseDTO(
                 statisticsTransactions.getCount(),

@@ -18,8 +18,8 @@ public class TransactionService {
     private final List<TransactionRequestDTO> transactionList = new ArrayList<>();
 
     public void putTransactions(TransactionRequestDTO dto) {
-
         log.info("[TransactionService] putTransactions: " + dto);
+        long start = System.currentTimeMillis();
 
         if (dto.date().isAfter(OffsetDateTime.now())) {
             log.error("[TransactionService] putTransactions: Data and time greater than current data and time");
@@ -32,20 +32,32 @@ public class TransactionService {
 
         transactionList.add(dto);
 
-        log.info("[TransactionService] putTransactions: Transaction successfully added");
+        long requestTime = System.currentTimeMillis() - start;
+        log.info("[TransactionService] putTransactions: Transaction successfully added" +
+                " | Request Time -> " + requestTime + "ms");
     }
 
     public void deleteTransactions() {
         log.info("[TransactionService] deleteTransactions: Started ");
+        long start = System.currentTimeMillis();
+
         transactionList.clear();
-        log.info("[TransactionService] deleteTransactions: Transactions successfully deleted ");
+
+        long requestTime = System.currentTimeMillis() - start;
+        log.info("[TransactionService] deleteTransactions: Transactions successfully deleted" +
+                " | Request Time -> " + requestTime + "ms");
     }
 
-    public List<TransactionRequestDTO> getTransactions(Integer searchRange){
+    public List<TransactionRequestDTO> getTransactions(Integer searchRange) {
         log.info("[TransactionService] getTransactions: Search Range -> " + searchRange + "s");
+        long start = System.currentTimeMillis();
+
         OffsetDateTime dateHourRange = OffsetDateTime.now().minusSeconds(searchRange);
 
-        log.info("[TransactionService] getTransactions: Transactions successfully returned");
+        long requestTime = System.currentTimeMillis() - start;
+        log.info("[TransactionService] getTransactions: Transactions successfully returned" +
+                " | Request Time -> " + requestTime + "ms");
+
         return transactionList.stream()
                 .filter(transaction -> transaction.date()
                         .isAfter(dateHourRange)).toList();
