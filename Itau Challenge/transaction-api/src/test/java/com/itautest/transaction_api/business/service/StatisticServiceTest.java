@@ -28,7 +28,6 @@ public class StatisticServiceTest {
     TransactionService transactionService;
 
     TransactionRequestDTO transaction;
-
     StatisticResponseDTO statistic;
 
     @BeforeEach
