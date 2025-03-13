@@ -1,6 +1,7 @@
 package com.itautest.transaction_api.controller;
 
 import com.itautest.transaction_api.business.services.StatisticService;
+import com.itautest.transaction_api.controller.dtos.ConstantesDTO;
 import com.itautest.transaction_api.controller.dtos.StatisticResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/statistic")
+@RequestMapping(ConstantesDTO.URL_STATISTIC)
 @RequiredArgsConstructor
 public class StatisticsController {
 
@@ -28,7 +29,7 @@ public class StatisticsController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<StatisticResponseDTO> getStatistics(
-            @RequestParam(value = "searchRange", required = false, defaultValue = "60") Integer searchRange) {
+            @RequestParam(value = ConstantesDTO.STATISTIC_SEARCH_RANGE, required = false, defaultValue = "60") Integer searchRange) {
 
         return ResponseEntity.ok(statisticService.getStatisticsTransactions(searchRange));
     }

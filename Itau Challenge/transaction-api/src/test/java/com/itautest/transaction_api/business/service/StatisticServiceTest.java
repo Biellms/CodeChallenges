@@ -37,7 +37,7 @@ public class StatisticServiceTest {
     }
 
     @Test
-    void getStatisticWithSuccess(){
+    void mutsGetStatisticWithSuccess(){
         when(transactionService.getTransactions(60))
                 .thenReturn(Collections.singletonList(transaction));
 
@@ -48,7 +48,7 @@ public class StatisticServiceTest {
     }
 
     @Test
-    void getStatisticEmptyList() {
+    void mustGetStatisticEmptyList() {
         StatisticResponseDTO statisticEmptyList =
                 new StatisticResponseDTO(0L, 0.0, 0.0, 0.0, 0.0);
 

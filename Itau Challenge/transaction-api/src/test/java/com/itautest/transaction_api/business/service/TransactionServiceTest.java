@@ -1,6 +1,5 @@
 package com.itautest.transaction_api.business.service;
 
-import com.itautest.transaction_api.business.services.StatisticService;
 import com.itautest.transaction_api.business.services.TransactionService;
 import com.itautest.transaction_api.controller.dtos.ConstantesDTO;
 import com.itautest.transaction_api.controller.dtos.StatisticResponseDTO;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.OffsetDateTime;
@@ -34,7 +32,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    void putTransactionWithSuccess() {
+    void mustPutTransactionWithSuccess() {
         transactionService.putTransactions(transaction);
 
         List<TransactionRequestDTO> transactionReturn = transactionService.getTransactions(5000);
@@ -59,7 +57,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    void deleteTransactionWithSuccess() {
+    void mustDeleteTransactionWithSuccess() {
         transactionService.putTransactions(transaction);
         transactionService.deleteTransactions();
 
@@ -69,7 +67,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    void getTransactionInAndOutOfRange(){
+    void mustGetTransactionInAndOutOfRange() {
 
         TransactionRequestDTO transactionOutRange = new TransactionRequestDTO(10.00, OffsetDateTime.now().minusMinutes(1));
 
