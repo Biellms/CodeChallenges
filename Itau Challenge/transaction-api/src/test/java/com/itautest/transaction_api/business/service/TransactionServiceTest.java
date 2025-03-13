@@ -71,7 +71,7 @@ public class TransactionServiceTest {
     @Test
     void getTransactionInAndOutOfRange(){
 
-        TransactionRequestDTO transactionOutRange = new TransactionRequestDTO(10.00, OffsetDateTime.now().minusHours(1));
+        TransactionRequestDTO transactionOutRange = new TransactionRequestDTO(10.00, OffsetDateTime.now().minusMinutes(1));
 
         transactionService.putTransactions(transaction);
         transactionService.putTransactions(transactionOutRange);
