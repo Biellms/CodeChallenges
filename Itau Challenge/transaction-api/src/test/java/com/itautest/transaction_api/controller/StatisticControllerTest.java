@@ -46,7 +46,7 @@ public class StatisticControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.count").value(statistic.count()));
+                .andExpect(jsonPath("$.count").value(2L));
     }
 
 }

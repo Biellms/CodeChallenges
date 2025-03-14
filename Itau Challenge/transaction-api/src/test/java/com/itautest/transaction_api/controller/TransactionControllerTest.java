@@ -18,8 +18,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.text.SimpleDateFormat;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -46,6 +51,19 @@ public class TransactionControllerTest {
         objectMapper.registerModule(new JavaTimeModule());
         mockMvc = MockMvcBuilders.standaloneSetup(transactionController).build();
         transaction = new TransactionRequestDTO(20.0, OffsetDateTime.of(2025, 3, 13, 21, 30, 0, 0, ZoneOffset.UTC));
+    }
+
+    @Test
+    void mustGetTransactionWithSuccess() throws Exception {
+        when(transactionService.getTransactions(60)).thenReturn(Collections.singletonList(transaction));
+
+        mockMvc.perform(get(ConstantesDTO.URL_TRANSACTION).
+                        param(ConstantesDTO.STATISTIC_SEARCH_RANGE, "60")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].value").value(transaction.value()));
     }
 
     @Test
