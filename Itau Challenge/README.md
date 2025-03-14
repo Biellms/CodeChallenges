@@ -61,7 +61,7 @@ To run this application you will need:
 - Create a Docker Image
 
 ```bash
-docker build -t transaction-api 
+docker build -t transaction-api .
 ```
 
 - Run the container
@@ -86,20 +86,20 @@ docker run -p 8080:8080 transaction-api
   POST /transaction
 ```
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Param   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
-| `value` | `BigDecimal` | **Obrigatório**. O valor da transação 
-| `date` | `OffsetDateTime` | **Obrigatório**. O horário que a transação ocorreu
+| `value` | `BigDecimal` | **Required** O valor da transação 
+| `date` | `OffsetDateTime` | **Required** O horário que a transação ocorreu
 
-#### List Trasactions
+#### List Transactions
 
 ```http
   GET /transaction
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Param   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `searchRange` | `Integer` | **Não Obrigatório** O padrão default é 60s  |
+| `searchRange` | `Integer` | **Not Required** O padrão default é 60s  |
 
 #### Delete Transactions
 
@@ -113,9 +113,9 @@ docker run -p 8080:8080 transaction-api
   GET /statistic
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Param   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `searchRange` | `Integer` | **Não Obrigatório** O padrão default é 60s  |
+| `searchRange` | `Integer` | **Not Required** O padrão default é 60s  |
 
 <br><br>
 
