@@ -1,3 +1,20 @@
+<div align="center">
+
+### **Code Challenges** 🧠
+
+Repository with programming challenges and technical interview challenges to improve programming skills.
+
+<br>
+
+</div>
+
+#
+- [Itau Challenge](https://github.com/Biellms/CodeChallenges/tree/main/Itau%20Challenge)
+
+
+<br><br>
+
+#
 
 <div align="center">
 

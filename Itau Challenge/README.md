@@ -1,77 +1,123 @@
+<div align="center">
 
-# Transação API
+### Transaction API
 
-Este projeto é uma API REST para gerenciar transações e calcular estatísticas das transações realizadas nos últimos 60 segundos. A API foi desenvolvida com Java e Spring Boot.
+</div>
 
-## Variáveis de Ambiente
+Este projeto é a resolução de um **[desafio técnico do Itau](https://github.com/rafaellins-itau/desafio-itau-vaga-99-junior)**, da qual foi desenvolvido
+ uma API REST para gerenciar transações e calcular estatísticas das transações realizadas nos últimos 60 segundos. 
+ 
+ A API REST foi desenvolvida com Java e Spring Boot, com banco de dados em memória e testes unitarios com jUnit.
 
-Para rodar esta aplicação, você precisa de:
+<br>
 
-Java: JDK 21 ou superior.
-Maven: Versão 3.8.1 ou superior.
-Git: Para clonar o repositório.
-Docker (opcional): Caso queira rodar a aplicação em um container.
+#
 
-##  Como Configurar o Projeto
+<div align="center">
 
-1. Clone o Repositório
+### Environmental Variables
 
-2. Compile o Projeto
+</div>
+
+To run this application you will need:
+
+`Java`: JDK 21 ou superior.
+`Gradle`: Versão 8.12.1 ou superior.
+`Git`: Para clonar o repositório.
+`Docker` (opcional): Caso queira rodar a aplicação em um container.
+
+<div align="center">
+
+<br>
+
+#
+
+### How to configure the project
+
+</div>
+
+1. Clone the repository
+
+<br>
+
+2. Compile the project
 
 ```bash
  gradle clean build
 ```
 
-3. Execute o Projeto
+<br>
+
+3. Run the project
 
 ```bash
 ./gradlew bootRun
 ```
-4. Como Rodar em um Container (Opcional)
 
-4.1. Crie a Imagem Docker
-Certifique-se de que o Docker está instalado e execute:
+<br>
+
+4. How to run with docker (Opcional)
+
+- Create a Docker Image
 
 ```bash
 docker build -t transaction-api 
 ```
 
-4.2. Execute o Container
+- Run the container
 
 ```bash
 docker run -p 8080:8080 transaction-api
 ```
 
-## Documentação da API
+<br>
 
-#### Receber Transações
+#
+
+<div align="center">
+
+### API Documentation
+
+</div>
+
+#### Create Transaction
 
 ```http
-  POST /transacao
+  POST /transaction
 ```
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `valor` | `BigDecimal` | **Obrigatório**. O valor da transação 
-| `dataHora` | `OffsetDateTime` | **Obrigatório**. O horário que a transação ocorreu
+| `value` | `BigDecimal` | **Obrigatório**. O valor da transação 
+| `date` | `OffsetDateTime` | **Obrigatório**. O horário que a transação ocorreu
 
-#### Limpar Transações
-
-```http
-  DELETE /transacao
-```
-
-#### Calcular Estatísticas
+#### List Trasactions
 
 ```http
-  GET /estatistica
+  GET /transaction
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `intervaloSegundos` | `integer` | **Não Obrigatório** O padrão default é 60s  |
+| `searchRange` | `Integer` | **Não Obrigatório** O padrão default é 60s  |
 
-<br>
+#### Delete Transactions
+
+```http
+  DELETE /transaction
+```
+
+#### Calculate Statistics
+
+```http
+  GET /statistic
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `searchRange` | `Integer` | **Não Obrigatório** O padrão default é 60s  |
+
+<br><br>
 
 #
 
