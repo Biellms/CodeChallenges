@@ -25,8 +25,8 @@ public class TransactionController {
             @ApiResponse(responseCode = "400", description = "Request Error"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<Void> putTransactions(@RequestBody TransactionRequestDTO dto) {
-        transactionService.putTransactions(dto);
+    public ResponseEntity<Void> postTransactions(@RequestBody TransactionRequestDTO dto) {
+        transactionService.postTransactions(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

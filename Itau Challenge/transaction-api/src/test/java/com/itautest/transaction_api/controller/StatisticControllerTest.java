@@ -39,10 +39,11 @@ public class StatisticControllerTest {
 
     @Test
     void mustGetStatisticWithSuccess() throws Exception {
-
         when(statisticService.getStatisticsTransactions(60)).thenReturn(statistic);
 
-        mockMvc.perform(get(ConstantesDTO.URL_STATISTIC).param(ConstantesDTO.STATISTIC_SEARCH_RANGE, "60").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get(ConstantesDTO.URL_STATISTIC).
+                        param(ConstantesDTO.STATISTIC_SEARCH_RANGE, "60")
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.count").value(statistic.count()));

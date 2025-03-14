@@ -32,8 +32,8 @@ public class TransactionServiceTest {
     }
 
     @Test
-    void mustPutTransactionWithSuccess() {
-        transactionService.putTransactions(transaction);
+    void mustPostTransactionWithSuccess() {
+        transactionService.postTransactions(transaction);
 
         List<TransactionRequestDTO> transactionReturn = transactionService.getTransactions(5000);
 
@@ -43,7 +43,7 @@ public class TransactionServiceTest {
     @Test
     void expectionTransactionNegativeValue() {
         UnprocessableEntity exception = assertThrows(UnprocessableEntity.class,
-                () -> transactionService.putTransactions(new TransactionRequestDTO(-10.0, OffsetDateTime.now())));
+                () -> transactionService.postTransactions(new TransactionRequestDTO(-10.0, OffsetDateTime.now())));
 
         assertEquals(ConstantesDTO.EXC_NEGATIVE_VALUE, exception.getMessage());
     }
@@ -51,14 +51,14 @@ public class TransactionServiceTest {
     @Test
     void expectionTransactionDateTimeGreater() {
         UnprocessableEntity exception = assertThrows(UnprocessableEntity.class,
-                () -> transactionService.putTransactions(new TransactionRequestDTO(10.0, OffsetDateTime.now().plusMinutes(1))));
+                () -> transactionService.postTransactions(new TransactionRequestDTO(10.0, OffsetDateTime.now().plusMinutes(1))));
 
         assertEquals(ConstantesDTO.EXC_DATE_TIME_GREATER, exception.getMessage());
     }
 
     @Test
     void mustDeleteTransactionWithSuccess() {
-        transactionService.putTransactions(transaction);
+        transactionService.postTransactions(transaction);
         transactionService.deleteTransactions();
 
         List<TransactionRequestDTO> transactionReturn = transactionService.getTransactions(5000);
@@ -68,11 +68,10 @@ public class TransactionServiceTest {
 
     @Test
     void mustGetTransactionInAndOutOfRange() {
-
         TransactionRequestDTO transactionOutRange = new TransactionRequestDTO(10.00, OffsetDateTime.now().minusMinutes(1));
 
-        transactionService.putTransactions(transaction);
-        transactionService.putTransactions(transactionOutRange);
+        transactionService.postTransactions(transaction);
+        transactionService.postTransactions(transactionOutRange);
 
         List<TransactionRequestDTO> transactionReturn = transactionService.getTransactions(60);
 
