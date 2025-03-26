@@ -38,9 +38,13 @@ To run this application you will need:
 
 1. Clone the repository
 
+```bash
+ git clone https://github.com/Biellms/{link-do-projeto}
+```
+
 <br>
 
-2. Compile the project
+1. Compile the project
 
 ```bash
  gradle clean build
@@ -56,7 +60,15 @@ To run this application you will need:
 
 <br>
 
-4. How to run with docker (Opcional)
+4. Test the project
+
+```bash
+./gradlew test
+```
+
+<br>
+
+5. How to run with docker (Opcional)
 
 - Create a Docker Image
 
