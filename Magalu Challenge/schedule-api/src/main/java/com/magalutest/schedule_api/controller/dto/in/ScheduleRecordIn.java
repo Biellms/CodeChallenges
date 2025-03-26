@@ -6,7 +6,6 @@ import com.magalutest.schedule_api.infrastructure.enums.StatusNotificationEnum;
 import java.time.LocalDateTime;
 
 public record ScheduleRecordIn(
-        Long id,
         String emailDestinatary,
         String phoneDestinatary,
         String message,
