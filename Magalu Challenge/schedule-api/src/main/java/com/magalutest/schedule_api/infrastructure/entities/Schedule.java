@@ -25,6 +25,12 @@ public class Schedule {
     private LocalDateTime dateHourSend;
     private LocalDateTime dateHourSchedule;
     private LocalDateTime dateHourModification;
-    private String mensage;
-    private StatusNotificationEnum statusNotificationEnum;
+    private String message;
+    private StatusNotificationEnum statusNotification;
+
+    @PrePersist
+    private void prePersist() {
+        dateHourSchedule = LocalDateTime.now();
+        statusNotification = StatusNotificationEnum.SCHEDULED;
+    }
 }
