@@ -5,6 +5,7 @@ import com.magalutest.schedule_api.controller.dto.in.ScheduleRecordIn;
 import com.magalutest.schedule_api.controller.dto.out.ScheduleRecordOut;
 import com.magalutest.schedule_api.infrastructure.entities.Schedule;
 import com.magalutest.schedule_api.infrastructure.enums.StatusNotificationEnum;
+import com.magalutest.schedule_api.infrastructure.exception.NotFoundException;
 import com.magalutest.schedule_api.infrastructure.repositories.ScheduleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,13 +14,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 
 @ExtendWith(MockitoExtension.class)
 public class ScheduleServiceTest {
@@ -38,7 +39,6 @@ public class ScheduleServiceTest {
 
     @BeforeEach
     void setUp() {
-
         scheduleEntity = new Schedule(1L,
                 "email@email.com",
                 "55887996578",
@@ -113,5 +113,57 @@ public class ScheduleServiceTest {
         verify(scheduleMapper, times(1)).toEntityCanceled(scheduleEntity);
         verify(scheduleRepository, times(1)).save(scheduleEntity);
     }
+
+    @Test
+    void mustThrowNotFoundExceptionWhenCancelingSchedule() {
+        when(scheduleRepository.findById(99L)).thenReturn(Optional.empty());
+
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> {
+            scheduleService.cancelSchedule(99L);
+        });
+
+        assertEquals("Id Not Found", exception.getMessage());
+
+        verify(scheduleRepository, never()).save(any());
+        verify(scheduleMapper, never()).toEntityCanceled(any());
+    }
+
+    @Test
+    void mustCreateScheduleWithBuilder() {
+        Schedule schedule = Schedule.builder()
+                .id(1L)
+                .emailDestinatary("email@email.com")
+                .phoneDestinatary("55887996578")
+                .dateHourSend(LocalDateTime.of(2025, 1, 2, 11, 1, 1))
+                .dateHourSchedule(null)
+                .dateHourModification(null)
+                .message("Please contact the store urgently")
+                .statusNotification(StatusNotificationEnum.SCHEDULED)
+                .build();
+
+        assertNotNull(schedule);
+        assertEquals(1L, schedule.getId());
+        assertEquals(scheduleOut.emailDestinatary(), schedule.getEmailDestinatary());
+        assertEquals(scheduleOut.phoneDestinatary(), schedule.getPhoneDestinatary());
+        assertEquals(scheduleOut.dateHourSend(), schedule.getDateHourSend());
+        assertNull(schedule.getDateHourSchedule());
+        assertNull(schedule.getDateHourModification());
+        assertEquals(scheduleOut.message(), schedule.getMessage());
+        assertEquals(scheduleOut.statusNotification(), schedule.getStatusNotification());
+    }
+
+    @Test
+    void mustSetDefaultValuesOnPrePersistUsingReflection() throws Exception {
+        Schedule schedule = new Schedule();
+
+        Method prePersistMethod = Schedule.class.getDeclaredMethod("prePersist");
+        prePersistMethod.setAccessible(true);
+
+        prePersistMethod.invoke(schedule);
+
+        assertNotNull(schedule.getDateHourSchedule());
+        assertEquals(StatusNotificationEnum.SCHEDULED, schedule.getStatusNotification());
+    }
+
 
 }
