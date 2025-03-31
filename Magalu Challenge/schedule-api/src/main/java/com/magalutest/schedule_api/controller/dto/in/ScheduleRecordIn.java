@@ -9,7 +9,6 @@ public record ScheduleRecordIn(
         String emailDestinatary,
         String phoneDestinatary,
         String message,
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss") LocalDateTime dateHourSend,
-        StatusNotificationEnum statusNotification) {
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss") LocalDateTime dateHourSend) {
 
 }
