@@ -7,18 +7,19 @@ import com.magalutest.schedule_api.controller.dto.ScheduleController;
 import com.magalutest.schedule_api.controller.dto.in.ScheduleRecordIn;
 import com.magalutest.schedule_api.controller.dto.out.ScheduleRecordOut;
 import com.magalutest.schedule_api.infrastructure.enums.StatusNotificationEnum;
+import com.magalutest.schedule_api.infrastructure.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -90,6 +91,15 @@ public class ScheduleControllerTest {
 
         mockMvc.perform(delete("/schedule/{id}", 1L))
                 .andExpect(status().isAccepted());
+    }
+
+    @Test
+    void mustReturn404WhenScheduleNotFound() throws Exception {
+        doThrow(new NotFoundException("Id Not Found")).when(scheduleService).getScheduleById(99L);
+
+        mockMvc.perform(get("/schedule/{id}", 99L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
     }
 
 }
