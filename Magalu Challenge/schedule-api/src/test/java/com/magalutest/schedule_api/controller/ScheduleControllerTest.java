@@ -85,7 +85,7 @@ public class ScheduleControllerTest {
     }
 
     @Test
-    void mustCancelScheduleWithSuccess() throws Exception {
+    void mustCancelScheduleByIdWithSuccess() throws Exception {
         doNothing().when(scheduleService).cancelSchedule(1L);
 
         mockMvc.perform(delete("/schedule/{id}", 1L))

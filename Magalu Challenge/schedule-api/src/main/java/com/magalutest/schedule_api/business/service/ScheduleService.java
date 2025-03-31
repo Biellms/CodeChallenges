@@ -16,10 +16,10 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final ScheduleMapper scheduleMapper;
 
-    public ScheduleRecordOut postSchedule(ScheduleRecordIn schedule) {
+    public ScheduleRecordOut postSchedule(ScheduleRecordIn scheduleIn) {
         return scheduleMapper.toOut(
                 scheduleRepository.save(
-                    scheduleMapper.toEntity(schedule)));
+                    scheduleMapper.toEntity(scheduleIn)));
     }
 
     public ScheduleRecordOut getScheduleById(Long id) {
@@ -29,10 +29,10 @@ public class ScheduleService {
     }
 
     public void cancelSchedule(Long id) {
-        Schedule schedule =  scheduleRepository.findById(id)
+        Schedule scheduleEntity =  scheduleRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Id Not Found"));
 
-        scheduleRepository.save(scheduleMapper.toEntityCanceled(schedule));
+        scheduleRepository.save(scheduleMapper.toEntityCanceled(scheduleEntity));
     }
 
 }
