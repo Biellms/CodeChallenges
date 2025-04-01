@@ -44,7 +44,7 @@ To run this application you will need:
 
 <br>
 
-1. Compile the project
+2. Compile the project
 
 ```bash
  gradle clean build
