@@ -92,13 +92,11 @@ docker-compose up -d
 
 </div>
 
-#### Create a schedule
-
 ```http
   POST /schedule
 ```
 
-| Body   | Tipo       | Descrição                           |
+| Param   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
 | `emailDestinatary` | `string` | **Required**. Email do destinatário do agendamento |
 | `phoneDestinatary` | `string` | **Required**. Telefone do destinatário do agendamento |
@@ -111,7 +109,7 @@ docker-compose up -d
   GET /schedule/${id}
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Param   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `string` | **Required**. O ID do agendamento que você quer buscar |
 
@@ -121,7 +119,7 @@ docker-compose up -d
   DELETE /schedule/${id}
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Param   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `string` | **Required**. O ID do agendamento que você quer cancelar |
 
