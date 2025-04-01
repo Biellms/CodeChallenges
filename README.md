@@ -10,7 +10,7 @@ Repository with programming challenges and technical interview challenges to imp
 
 #
 - [Itau Challenge](https://github.com/Biellms/CodeChallenges/tree/main/Itau%20Challenge)
-
+- [Magalu Challenge](https://github.com/Biellms/CodeChallenges/tree/main/Magalu%20Challenge)
 
 <br><br>
 
